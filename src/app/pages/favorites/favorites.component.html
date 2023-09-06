@@ -1,0 +1,5 @@
+<div class="favorites">
+    <div class="jokes" *ngFor="let joke of jokes$ | async;">
+       <app-card [isFavorite]="isFavorite(joke)" [joke]="joke" (favoriteJoke)="favoriteJoke(joke)"></app-card>
+    </div>
+</div>
