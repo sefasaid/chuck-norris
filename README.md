@@ -1,4 +1,4 @@
-# FrontvalueTest
+# Chuck Norris Facts
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
@@ -6,13 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/application` directory.
 
 ## Running unit tests
 
@@ -20,8 +16,28 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+I didn't add e2e because of the time.
 
-## Further help
+## Live Demo
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To get more live demo click [here](https://sefasaid.github.io/chuck-norris/#/home).
+
+## Why use hash route?
+
+I use github pages to deploy it. And it's limited configuration. (not like nginx or nodejs ect) . That's why I use hash route.
+
+## Github actions
+
+I created github actions for test build and deploy.
+
+## Project structure
+
+I separate pages & components & services. I could do like shared library but this is small project so I don't want to make to complex.
+
+Also I could use lazy loading in routing and create modules for every page but again it's small project.
+
+Also I create a base component because of there were some functions same with two pages. Thanks for typescript we can inherit the class.
+
+## like my project?
+
+hire me :)
