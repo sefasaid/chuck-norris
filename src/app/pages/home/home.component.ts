@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
-import { BasePageComponent } from 'src/app/components/base-page/base-page.component';
 import { Joke } from 'src/app/interfaces/joke';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -9,14 +8,13 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends BasePageComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   jokes$: BehaviorSubject<Array<Joke>>;
   destroy$: Subject<boolean>;
 
   constructor(
-    apiService: ApiService
+    public apiService: ApiService
   ) {
-    super(apiService);
     this.destroy$ = new Subject<boolean>();
     this.jokes$ = this.apiService.jokes$;
   }
@@ -32,5 +30,12 @@ export class HomeComponent extends BasePageComponent implements OnInit, OnDestro
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+  favoriteJoke(joke: Joke): void {
+    this.apiService.favoriteJoke(joke);
+  }
+
+  isFavorite(joke: Joke): boolean {
+    return !!this.apiService.favoriteJokes$.getValue().find(favoriteJoke => favoriteJoke.id === joke.id);
   }
 }

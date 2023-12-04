@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BasePageComponent } from 'src/app/components/base-page/base-page.component';
 import { Joke } from 'src/app/interfaces/joke';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -9,13 +8,18 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss']
 })
-export class FavoritesComponent extends BasePageComponent {
+export class FavoritesComponent {
   jokes$: BehaviorSubject<Array<Joke>>;
   constructor(
-    apiService: ApiService
+    public apiService: ApiService
   ) {
-    super(apiService);
     this.jokes$ = this.apiService.favoriteJokes$;
   }
+  favoriteJoke(joke: Joke): void {
+    this.apiService.favoriteJoke(joke);
+  }
 
+  isFavorite(joke: Joke): boolean {
+    return !!this.apiService.favoriteJokes$.getValue().find(favoriteJoke => favoriteJoke.id === joke.id);
+  }
 }

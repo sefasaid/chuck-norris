@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { CardComponent } from './components/card/card.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BasePageComponent } from './components/base-page/base-page.component';
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { HomeComponent } from './pages/home/home.component';
     HomeComponent,
     FavoritesComponent,
     CardComponent,
-    BasePageComponent
   ],
   imports: [
     BrowserModule,
