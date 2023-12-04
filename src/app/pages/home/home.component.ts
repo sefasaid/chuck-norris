@@ -14,7 +14,7 @@ export class HomeComponent extends BasePageComponent implements OnInit, OnDestro
   destroy$: Subject<boolean>;
 
   constructor(
-    override apiService: ApiService
+    apiService: ApiService
   ) {
     super(apiService);
     this.destroy$ = new Subject<boolean>();

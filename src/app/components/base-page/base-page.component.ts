@@ -7,10 +7,12 @@ import { ApiService } from 'src/app/services/api.service';
   template: '',
 })
 export class BasePageComponent {
-
+  protected apiService: ApiService;
   constructor(
-    public apiService: ApiService
-  ) { }
+    apiService: ApiService
+  ) {
+    this.apiService = apiService
+  }
 
   favoriteJoke(joke: Joke): void {
     this.apiService.favoriteJoke(joke);
