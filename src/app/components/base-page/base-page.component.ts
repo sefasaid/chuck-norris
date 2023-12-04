@@ -17,6 +17,6 @@ export class BasePageComponent {
   }
 
   isFavorite(joke: Joke): boolean {
-    return this.apiService.favoriteJokes$.getValue().find(favoriteJoke => favoriteJoke.id === joke.id) ? true : false;
+    return !!this.apiService.favoriteJokes$.getValue().find(favoriteJoke => favoriteJoke.id === joke.id);
   }
 }

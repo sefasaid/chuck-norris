@@ -29,25 +29,25 @@ describe('CardComponent', () => {
   });
 
   it(`should have a joke input`, () => {
-    var span = fixture.nativeElement.querySelector('span');
+    const span = fixture.nativeElement.querySelector('span');
     // Test elements that depend on the input
     expect(span.innerText).toEqual('test');
   });
   it(`should have a non-favorite button`, () => {
-    var button = fixture.nativeElement.querySelector('[data-test="non-favorite"]');
+    const button = fixture.nativeElement.querySelector('[data-test="non-favorite"]');
     // Test elements that depend on the input
     expect(button).toBeTruthy();
   });
   it(`should have a favorite button`, () => {
     component.isFavorite = true;
     fixture.detectChanges();
-    var button = fixture.nativeElement.querySelector('[data-test="favorite"]');
+    const button = fixture.nativeElement.querySelector('[data-test="favorite"]');
     // Test elements that depend on the input
     expect(button).toBeTruthy();
   });
   it(`should emit a favorite event`, () => {
     spyOn(component.favoriteJoke, 'emit');
-    var button = fixture.nativeElement.querySelector('.card-icon');
+    const button = fixture.nativeElement.querySelector('.card-icon');
     button.click();
     expect(component.favoriteJoke.emit).toHaveBeenCalled();
   });
