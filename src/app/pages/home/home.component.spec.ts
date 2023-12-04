@@ -21,17 +21,17 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
   it(`should run initialJokes onInit`, () => {
-    spyOn(component.apiService, 'initialJokes');
+    spyOn(component['apiService'], 'initialJokes');
     component.ngOnInit();
-    expect(component.apiService.initialJokes).toHaveBeenCalled();
+    expect(component['apiService'].initialJokes).toHaveBeenCalled();
   });
   it(`should run getNewJoke every 5 seconds`, () => {
     jasmine.clock().install();
-    spyOn(component.apiService, 'getNewJoke');
+    spyOn(component['apiService'], 'getNewJoke');
     component.ngOnInit();
-    expect(component.apiService.getNewJoke).not.toHaveBeenCalled();
+    expect(component['apiService'].getNewJoke).not.toHaveBeenCalled();
     jasmine.clock().tick(5000);
-    expect(component.apiService.getNewJoke).toHaveBeenCalled();
+    expect(component['apiService'].getNewJoke).toHaveBeenCalled();
   });
   it(`should unsubscribe on destroy`, () => {
     spyOn(component.destroy$, 'next');
