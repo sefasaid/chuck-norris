@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 describe('ApiService', () => {
   let service: ApiService;
   let httpTestingController: HttpTestingController;
+  let localStore: { [x: string]: string; };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,10 +17,21 @@ describe('ApiService', () => {
     service = TestBed.inject(ApiService);
 
     httpTestingController = TestBed.inject(HttpTestingController);
+    localStore = {};
+    spyOn(window.localStorage, 'getItem').and.callFake((key) =>
+      key in localStore ? localStore[key] : null
+    );
+    spyOn(window.localStorage, 'setItem').and.callFake(
+      (key, value) => (localStore[key] = value + '')
+    );
+    spyOn(window.localStorage, 'clear').and.callFake(() => (localStore = {}));
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+  it('should get empty value from localstora', () => {
+    expect(window.localStorage.getItem('favoriteJokes')).toBeNull();
   });
   it('should have a run http call with getRandomJoke', () => {
     service.getRandomJoke().subscribe();
@@ -69,8 +81,15 @@ describe('ApiService', () => {
     } as Joke;
     service.favoriteJoke(joke);
     expect(service.favoriteJokes$.getValue().length).toEqual(1);
+
+    // it should set to localstorage so that means localstorage should equal to favoriteJokes
+    const localJokes = JSON.parse(window.localStorage.getItem('favoriteJokes') as string);
+    expect(localJokes).toEqual(service.favoriteJokes$.getValue());
+
     service.favoriteJoke(joke);
     expect(service.favoriteJokes$.getValue().length).toEqual(0);
+    // ehe localstorage is empty now because there shouldn't be any favorite joke
+    expect(window.localStorage.getItem('favoriteJokes')).toEqual('[]');
   });
 
 });

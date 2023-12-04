@@ -15,6 +15,10 @@ describe('HomeComponent', () => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    jasmine.clock().install();
+  });
+  afterEach(() => {
+    jasmine.clock().uninstall();
   });
 
   it('should create', () => {
@@ -26,7 +30,6 @@ describe('HomeComponent', () => {
     expect(component['apiService'].initialJokes).toHaveBeenCalled();
   });
   it(`should run getNewJoke every 5 seconds`, () => {
-    jasmine.clock().install();
     spyOn(component['apiService'], 'getNewJoke');
     component.ngOnInit();
     expect(component['apiService'].getNewJoke).not.toHaveBeenCalled();
