@@ -32,11 +32,10 @@ I created github actions for test build and deploy.
 
 ## Project structure
 
-I separate pages & components & services. I could do like shared library but this is small project so I don't want to make to complex.
+I separate pages & components & services.
 
-Also I could use lazy loading in routing and create modules for every page but again it's small project.
+Also I did use lazy loading in routing and create modules for every.
 
-Also I create a base component because of there were some functions same with two pages. Thanks for typescript we can inherit the class.
 
 ## like my project?
 
