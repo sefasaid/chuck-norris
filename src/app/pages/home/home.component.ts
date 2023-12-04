@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, interval, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, interval, switchMap, takeUntil } from 'rxjs';
 import { Joke } from 'src/app/interfaces/joke';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -22,10 +22,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.apiService.initialJokes();
     interval(5000)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.apiService.getNewJoke();
-      });
+      .pipe(takeUntil(this.destroy$),
+        switchMap(() => this.apiService.getNewJoke()
+          .pipe(takeUntil(this.destroy$))))
+      .subscribe();
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);

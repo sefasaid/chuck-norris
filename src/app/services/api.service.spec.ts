@@ -1,21 +1,22 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { ApiService } from './api.service';
 import { Joke } from '../interfaces/joke';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 describe('ApiService', () => {
   let service: ApiService;
   let httpTestingController: HttpTestingController;
   let localStore: { [x: string]: string; };
-
+  let httpClient: HttpClient;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(ApiService);
-
+    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
     localStore = {};
     spyOn(window.localStorage, 'getItem').and.callFake((key) =>
@@ -26,7 +27,10 @@ describe('ApiService', () => {
     );
     spyOn(window.localStorage, 'clear').and.callFake(() => (localStore = {}));
   });
-
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
