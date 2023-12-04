@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { FavoritesComponent } from './pages/favorites/favorites.component';
-
-// I could do a lazy loading here, but I don't think it's necessary for this project
-
+// lazy loading
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'favorites', component: FavoritesComponent },
+    {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./pages/favorites/favorites.module').then(m => m.FavoritesModule)
+  },
   { path: '**', redirectTo: 'home' }
 ];
 
