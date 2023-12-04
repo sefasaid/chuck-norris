@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class FavoritesComponent {
   jokes$: BehaviorSubject<Array<Joke>>;
   constructor(
-    public apiService: ApiService
+    private apiService: ApiService
   ) {
     this.jokes$ = this.apiService.favoriteJokes$;
   }

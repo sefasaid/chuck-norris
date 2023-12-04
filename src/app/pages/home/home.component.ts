@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean>;
 
   constructor(
-    public apiService: ApiService
+    private apiService: ApiService
   ) {
     this.destroy$ = new Subject<boolean>();
     this.jokes$ = this.apiService.jokes$;
